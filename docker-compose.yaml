@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  front:
+    build: 
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - 3000:80
+    depends_on:
+      - back
+    networks:
+      - app-networks
+    
+  back:
+    build: 
+      context: ./backend
+      dockerfile: dockerfile
+    ports:
+      - 8000:8000
+    networks:
+      - app-networks
+
+networks:
+  app-networks:
+    driver: bridge
